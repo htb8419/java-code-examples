@@ -8,8 +8,8 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>security-http-basic</artifactId>
-    <name>Security http basic</name>
+    <artifactId>basic-authentication</artifactId>
+    <name>Basic Authentication</name>
 
     <build>
         <plugins>

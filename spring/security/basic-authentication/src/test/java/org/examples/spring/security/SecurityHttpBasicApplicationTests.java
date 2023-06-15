@@ -29,7 +29,7 @@ public class SecurityHttpBasicApplicationTests {
     MockMvc mockMvc;
 
     @Test
-    public void testUploadFile() throws Exception {
+    public void succeedAuthentication() throws Exception {
         //given
         String username = "demo";
         String password = "demo";
@@ -43,6 +43,20 @@ public class SecurityHttpBasicApplicationTests {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/plain;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.content().string(IsEqualIgnoringCase.equalToIgnoringCase(username)));
+    }
+    @Test
+    public void failedAuthentication() throws Exception {
+        //given
+        String username = "demo";
+        String password = "htyhgy";
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setBasicAuth(username, password);
+        //when
+        this.mockMvc.perform(MockMvcRequestBuilders.get(URI.create("/user"))
+                        .headers(httpHeaders))
+                //then
+                .andDo(result -> LOGGER.info("server response >> {}  ", result.getResponse().getContentAsString()))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
 
 }
