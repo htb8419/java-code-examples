@@ -4,16 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.examples</groupId>
-        <artifactId>spring-examples-parent</artifactId>
+        <artifactId>spring-examples</artifactId>
         <version>0.0.1</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-security-examples-parent</artifactId>
+    <artifactId>spring-security-examples</artifactId>
     <packaging>pom</packaging>
-    <name>Spring security</name>
+    <name>Security Examples</name>
 
     <modules>
-        <module>security-http-basic</module>
+        <module>basic-authentication</module>
     </modules>
 
     <dependencies>

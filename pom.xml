@@ -30,8 +30,11 @@
     <profiles>
         <profile>
             <id>Spring</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <modules>
-                <module>spring</module>
+                <module>spring-examples</module>
             </modules>
         </profile>
     </profiles>

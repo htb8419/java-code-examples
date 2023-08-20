@@ -6,11 +6,16 @@
         <groupId>org.examples</groupId>
         <artifactId>java-examples-parent</artifactId>
         <version>0.0.1</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-examples-parent</artifactId>
+    <artifactId>spring-examples</artifactId>
     <packaging>pom</packaging>
-    <name>Spring</name>
+    <name>Spring Examples</name>
+
+    <modules>
+        <module>spring-security-examples</module>
+    </modules>
 
     <properties>
         <spring-boot.version>2.7.12</spring-boot.version>
@@ -27,9 +32,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<modules>
-    <module>./security</module>
-</modules>
     <dependencies>
         <dependency>
             <groupId>com.h2database</groupId>
