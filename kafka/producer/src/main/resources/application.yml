@@ -1,0 +1,16 @@
+server:
+  port: 8001
+logging:
+  level:
+    root: info
+
+spring:
+  application:
+    name: spring-kafka-producer
+  kafka:
+    bootstrap-servers: 192.168.25.53:9092,192.168.25.53:9192,192.168.25.53:9292
+    template:
+      default-topic: car-info
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
