@@ -1,0 +1,10 @@
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+    org.examples: debug
+
+spring:
+  application:
+    name: logging-response-time
