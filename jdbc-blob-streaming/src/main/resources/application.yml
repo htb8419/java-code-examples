@@ -1,0 +1,12 @@
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//192.168.25.20:1521/cor_dev
+    username: camunda
+    password: camunda
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+server:
+  port: 9011
