@@ -25,6 +25,7 @@
         <module>security</module>
         <module>webmvc-async</module>
         <module>jdbc-blob-streaming</module>
+        <module>video-streaming</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
