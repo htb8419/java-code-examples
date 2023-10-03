@@ -20,23 +20,12 @@
     </properties>
 
     <modules>
-        <module>logging-response-time</module>
         <module>kafka</module>
+        <module>logging-response-time</module>
+        <module>security</module>
+        <module>webmvc-async</module>
         <module>jdbc-blob-streaming</module>
     </modules>
-
-    <!--   <profiles>
-       <profile>
-           <id>Spring</id>
-           <activation>
-               <activeByDefault>true</activeByDefault>
-           </activation>
-           <modules>
-               <module>spring-examples</module>
-           </modules>
-       </profile>
-   </profiles>-->
-
     <dependencies>
         <!--Spring Dependency-->
         <dependency>
