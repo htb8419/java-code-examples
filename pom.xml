@@ -26,6 +26,7 @@
         <module>webmvc-async</module>
         <module>jdbc-blob-streaming</module>
         <module>video-streaming</module>
+        <module>spring-gateway</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

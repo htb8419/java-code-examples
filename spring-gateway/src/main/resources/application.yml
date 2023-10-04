@@ -1,0 +1,50 @@
+logging:
+  level:
+    org.springframework: info
+    org.springframework.cloud.gateway.route: info
+
+spring:
+  gateway:
+    routes:
+      - id: test-resources-srv
+        uri: http://192.168.103.34:9090/
+        predicates:
+          - Path= /test/**
+      - id: ehr-service
+        uri: lb://ehr-service
+        predicates:
+          - Path= /ehr/**
+      - id: discovery-service-discovery
+        uri: http://192.168.103.34:9097
+        predicates:
+          - Path= /discovery/**
+      - id: discovery-service-eureka
+        uri: http://192.168.103.34:9097
+        predicates:
+          - Path= /eureka/**
+        filters:
+          - PrefixPath=/eureka
+          - StripPrefix=2
+    globalcors:
+      add-to-simple-url-handler-mapping: true
+      cors-configurations:
+        '[/**]':
+          allowedOriginPatterns: "*"
+          allowedMethods: "*"
+          allowedHeaders: "*"
+          allowCredentials: true
+    default-filters:
+      - StripPrefix=1
+      - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
+eureka:
+  client:
+    enabled: false
+
+dms:
+  logger:
+    enabled: false
+    elastic-log-repository:
+      enabled: false
+  application:
+    group: cloud-core
