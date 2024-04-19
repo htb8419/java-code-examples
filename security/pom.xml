@@ -15,6 +15,7 @@
 
     <modules>
         <module>basic-authentication</module>
+        <module>totp-authentication</module>
     </modules>
 
 </project>
