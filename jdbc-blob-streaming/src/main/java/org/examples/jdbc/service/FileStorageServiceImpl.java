@@ -23,7 +23,6 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Transactional
     public FileStorage store(String fileName, String fileContentType, InputStream fileContent) throws IOException {
         Session session=getSession();
-
         final Blob fileContentAsBlob = LobHelper.createBlob(session, fileContent, fileContent.available());
         FileStorage fileStorage = new FileStorage(fileName, fileContentType, fileContentAsBlob);
         session.save(fileStorage);

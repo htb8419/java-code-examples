@@ -1,3 +1,5 @@
+server:
+  port: 9011
 
 spring:
   datasource:
@@ -8,5 +10,15 @@ spring:
     multipart:
       max-file-size: 500MB
       max-request-size: 500MB
-server:
-  port: 9011
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    prometheus:
+      enabled: true

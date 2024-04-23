@@ -15,6 +15,8 @@
 
     <modules>
         <module>basic-authentication</module>
+        <module>oidc-authentication</module>
+        <module>oauth2-resource</module>
     </modules>
 
 </project>
