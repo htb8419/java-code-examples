@@ -27,6 +27,8 @@
         <module>jdbc-blob-streaming</module>
         <module>video-streaming</module>
         <module>spring-gateway</module>
+        <module>easy-rules</module>
+        <module>spring-scheduling</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

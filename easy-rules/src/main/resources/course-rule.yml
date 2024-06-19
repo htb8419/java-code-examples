@@ -1,0 +1,4 @@
+name: "weather rule"
+condition: "rate >= 90 "
+actions:
+  - "System.out.println(\"It rains, take an umbrella!\");"

@@ -1,0 +1,16 @@
+server:
+  port: 9099
+logging:
+  level:
+    root: fatal
+
+spring:
+  task:
+    scheduling:
+      pool:
+        size: 20
+      thread-name-prefix: "test-scheduling-"
+    execution:
+      pool:
+        core-size: 2
+      thread-name-prefix: "task-exec-"

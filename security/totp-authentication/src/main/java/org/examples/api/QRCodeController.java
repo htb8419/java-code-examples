@@ -5,6 +5,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.jboss.aerogear.security.otp.Totp;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,8 @@ public class QRCodeController {
     }
 
     private String generateOtpUri(String secret) {
-        return String.format("otpauth://totp/ACME%%20Co:john.doe@email.com?secret=%s&issuer=ACME%%20Co&algorithm=SHA1&digits=6&period=30", secret);
+        //String.format("otpauth://totp/ACME%%20Co:john.doe@email.com?secret=%s&issuer=ACME%%20Co&algorithm=SHA1&digits=6&period=30", secret);
+        return new Totp(secret).uri("test_username");
     }
 
     private String getUserSecret() {

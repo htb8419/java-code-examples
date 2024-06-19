@@ -1,7 +1,6 @@
 package org.examples.config;
 
 import org.jboss.aerogear.security.otp.Totp;
-import org.jboss.aerogear.security.otp.api.Clock;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,7 +13,7 @@ public class TotpAuthenticationProvider extends DaoAuthenticationProvider {
         //if user totp not active call super's method
         String presentedPassword = authentication.getCredentials().toString();
         String userSecret = getUserSecret(userDetails);
-        Totp totp = new Totp(userSecret,new Clock(30));
+        Totp totp = new Totp(userSecret);
         if (!isValidLong(presentedPassword) || !totp.verify(presentedPassword)) {
             throw new BadCredentialsException("Invalid verification code");
         }
