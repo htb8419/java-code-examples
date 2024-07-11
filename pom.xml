@@ -29,6 +29,7 @@
         <module>spring-gateway</module>
         <module>easy-rules</module>
         <module>spring-scheduling</module>
+        <module>object-unique-control</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

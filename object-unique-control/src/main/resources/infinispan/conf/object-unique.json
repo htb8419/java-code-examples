@@ -1,0 +1,17 @@
+{
+  "distributed-cache": {
+    "mode": "SYNC",
+    "statistics": true,
+    "encoding": {
+      "media-type": "text/plain"
+    },
+    "memory": {
+      "max-count": "100000",
+      "when-full": "REMOVE"
+    },
+    "locking": {
+      "acquire-timeout": "10",
+      "striping": false
+    }
+  }
+}

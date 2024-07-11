@@ -1,0 +1,25 @@
+# Use postgres/example user/password credentials
+version: '3.9'
+services:
+  infinispan-server:
+    image: infinispan/server:15.0.5.Final
+    restart: always
+    ports:
+      - "11222:11222"
+    # set shared memory limit when using docker-compose
+    shm_size: 256mb
+    # or set shared memory limit when deploy via swarm stack
+    volumes:
+     - type: bind
+       source: /ht/infinispan/conf
+       target: /opt/infinispan/server/conf
+    environment:
+      USER: admin
+      PASS: admin
+volumes:
+  db_data:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: /ht/infinispan/conf
+      o: bind
