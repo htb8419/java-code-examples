@@ -14,7 +14,7 @@ public class TestController {
     @Async
     @GetMapping("/test")
     public CompletableFuture<String> hello(HttpServletRequest request) {
-        Assert.isTrue(request.isAsyncStarted(),"resquest is not async");
+        Assert.isTrue(request.isAsyncStarted(),"request is not async");
         String name = Thread.currentThread().getName();
         Assert.isTrue(name.startsWith("mvc-task"), "miss configuration");
         System.out.println("threadName :" + name);

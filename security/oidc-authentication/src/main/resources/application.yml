@@ -1,0 +1,22 @@
+server:
+  port: 9090
+logging:
+  level:
+    root: info
+    org.springframework.web.client.RestTemplate: debug
+    org.springframework.security: debug
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: testapp
+            client-secret: AoV1YPKfiFfb9MX3V5DKzkdGDW9x18SQ
+        provider:
+          keycloak:
+            authorization-uri: http://localhost:8080/realms/test/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/realms/test/protocol/openid-connect/token
+            issuer-uri: http://localhost:8080/realms/test
+            jwk-set-uri: http://localhost:8080/realms/test/protocol/openid-connect/certs
+            user-info-uri: http://localhost:8080/realms/test/protocol/openid-connect/userinfo

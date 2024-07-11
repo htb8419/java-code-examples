@@ -7,6 +7,17 @@
         <groupId>org.examples</groupId>
         <artifactId>java-examples-parent</artifactId>
         <version>0.0.1</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>webmvc-async</artifactId>
+
+    <groupId>org.example</groupId>
+    <artifactId>oidc-authentication</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

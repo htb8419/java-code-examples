@@ -23,13 +23,21 @@ import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 @RestController
 @RequestMapping("/file")
 public class FileController {
-    Logger logger=LoggerFactory.getLogger(FileController.class);
+    Logger logger = LoggerFactory.getLogger(FileController.class);
     @Autowired
     FileStorageService fileStorageService;
 
     @PostMapping
-    public ResponseEntity<?> storeFile(@RequestParam("readAs") String readAs, @RequestParam("file") MultipartFile file) throws Exception {
-        try (final InputStream fileContent = "stream".equals(readAs) ? file.getInputStream() : new ByteArrayInputStream(file.getBytes())) {
+    public ResponseEntity<?> streamingStoreFile(@RequestParam("file") MultipartFile file) throws Exception {
+        try (final InputStream fileContent = file.getInputStream()) {
+            fileStorageService.store(file.getName(), file.getContentType(), fileContent);
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/nonStreaming")
+    public ResponseEntity<?> storeFile(@RequestParam("file") MultipartFile file) throws Exception {
+        try (final InputStream fileContent = new ByteArrayInputStream(file.getBytes())) {
             fileStorageService.store(file.getName(), file.getContentType(), fileContent);
         }
         return ResponseEntity.ok().build();
