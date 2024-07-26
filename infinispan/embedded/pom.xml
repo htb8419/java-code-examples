@@ -5,18 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.examples</groupId>
-        <artifactId>java-examples-parent</artifactId>
+        <artifactId>infinispan</artifactId>
         <version>0.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>infinispan</artifactId>
-    <packaging>pom</packaging>
 
-    <properties>
-        <version.infinispan>15.0.5.Final</version.infinispan>
-    </properties>
-    <modules>
-        <module>embedded</module>
-        <module>remote</module>
-    </modules>
+    <artifactId>infinispan-embedded</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core-jakarta</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+        </dependency>-->
+    </dependencies>
 </project>

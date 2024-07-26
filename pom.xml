@@ -31,6 +31,7 @@
         <module>spring-scheduling</module>
         <module>object-unique-control</module>
         <module>infinispan</module>
+        <module>redis</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

@@ -1,0 +1,11 @@
+infinispan:
+  client:
+   hotrod:
+    server_list: localhost:11222
+    client_intelligence: BASIC
+    auth_realm: default
+    auth_username: hadi
+    auth_password: hadi
+    use_auth: true
+
+#infinispan.client.hotrod.sasl_mechanism=DIGEST-MD5
