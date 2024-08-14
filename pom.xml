@@ -24,8 +24,8 @@
         <module>logging-response-time</module>
         <module>security</module>
         <module>webmvc-async</module>
+        <module>jdbc/jdbc-blob-streaming</module>
         <module>jdbc/jdbc-connection</module>
-        <module>jdbc-blob-streaming</module>
         <module>video-streaming</module>
         <module>spring-gateway</module>
         <module>easy-rules</module>
@@ -33,6 +33,7 @@
         <module>object-unique-control</module>
         <module>spring-boot-admin</module>
         <module>liquibase</module>
+        <module>mongodb</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
@@ -80,6 +81,10 @@
             <artifactId>junit-pioneer</artifactId>
             <version>1.7.2</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
     </dependencies>
 
