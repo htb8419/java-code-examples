@@ -1,0 +1,9 @@
+logging:
+  level:
+    root: info
+
+spring:
+  security:
+    user:
+      name: demo
+      password: '{bcrypt}$2a$10$RAfOWH/JAmn9M93jEuTS1.ahNsWyYkZBjyvf8t1Y9BvoTj8SN7JKW'

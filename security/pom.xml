@@ -18,6 +18,7 @@
         <module>oidc-authentication</module>
         <module>oauth2-resource</module>
         <module>totp-authentication</module>
+        <module>html-sanitizer</module>
     </modules>
 
 </project>

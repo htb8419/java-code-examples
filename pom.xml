@@ -30,6 +30,8 @@
         <module>easy-rules</module>
         <module>spring-scheduling</module>
         <module>object-unique-control</module>
+        <module>spring-boot-admin</module>
+        <module>liquibase</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

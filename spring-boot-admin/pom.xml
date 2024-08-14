@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.examples</groupId>
         <artifactId>java-examples-parent</artifactId>
+        <groupId>org.examples</groupId>
         <version>0.0.1</version>
     </parent>
-    <artifactId>webmvc-async</artifactId>
+    <artifactId>spring-boot-admin</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>3.0.0</version>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>3.3.3</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,9 +1,11 @@
 package org.examples.jdbc.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.sql.Blob;
 
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.FetchType.LAZY;
+
 
 @Entity
 @Table(name = "TST_FILE_STORAGE")

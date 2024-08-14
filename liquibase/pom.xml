@@ -8,13 +8,9 @@
         <artifactId>java-examples-parent</artifactId>
         <version>0.0.1</version>
     </parent>
-    <artifactId>webmvc-async</artifactId>
+    <artifactId>liquibase</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>3.0.0</version>
-        </dependency>
+
     </dependencies>
 </project>

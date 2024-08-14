@@ -4,21 +4,24 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 @RestController
 public class TestController {
 
-    @Async
+
     @GetMapping("/test")
-    public CompletableFuture<String> hello(HttpServletRequest request) {
-        Assert.isTrue(request.isAsyncStarted(),"request is not async");
-        String name = Thread.currentThread().getName();
-        Assert.isTrue(name.startsWith("mvc-task"), "miss configuration");
-        System.out.println("threadName :" + name);
+    @Async("mvcTaskExecutor")
+    public CompletableFuture<String> hello(ServletWebRequest webRequest) {
+        Assert.isTrue(webRequest.getRequest().isAsyncStarted(),"webRequest is not async");
+        String mvcThreadName = Thread.currentThread().getName();
+        Assert.isTrue(mvcThreadName.startsWith("mvc-task"), "miss configuration");
+        System.out.printf("TestController.hello [threadName=%s] \n", mvcThreadName);
         return CompletableFuture.supplyAsync(() -> {
+            System.out.printf("CompletableFuture.supplyAsync [threadName=%s] \n", Thread.currentThread().getName());
             //do anything
             return "hi, dear user";
         });

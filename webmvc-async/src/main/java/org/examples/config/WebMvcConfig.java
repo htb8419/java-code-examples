@@ -11,13 +11,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Autowired
-    ThreadPoolTaskExecutor mvcTaskExecutor;
 
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
         //Specify the amount of time, in milliseconds, before asynchronous request handling times out.
         configurer.setDefaultTimeout(120_000);
-        configurer.setTaskExecutor(mvcTaskExecutor);
+        configurer.setTaskExecutor(mvcTaskExecutor());
+    }
+
+    @Bean
+    public ThreadPoolTaskExecutor mvcTaskExecutor() {
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(10);
+        threadPoolTaskExecutor.setMaxPoolSize(100);
+        threadPoolTaskExecutor.setThreadNamePrefix("mvc-task-");
+        return threadPoolTaskExecutor;
     }
 }
