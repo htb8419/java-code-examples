@@ -1,6 +1,5 @@
 package org.examples.spring.security;
 
-import org.examples.api.UserController;
 import org.hamcrest.text.IsEqualIgnoringCase;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import java.net.URI;
 
 @ActiveProfiles("test")
 @PropertySource({"classpath:application.yml"})
-@WebMvcTest(controllers = UserController.class)
+@WebMvcTest(controllers = {})
 public class HttpBasicSecurityTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpBasicSecurityTest.class);
     @Autowired

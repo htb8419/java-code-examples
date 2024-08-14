@@ -1,0 +1,16 @@
+SELECT U.USER_NAME,
+       U.PASSWORD,
+       U.ENABLED_FLG,
+       P.UNIQUE_FIELD     AS NATIONAL_ID,
+       UP.MOBILE_NUMBER,
+       CASE
+           WHEN UP.TWO_STEP_ENABLED = 1 THEN
+               'force'
+           ELSE
+               'skip' END AS OTP_AUTH
+FROM COR.APPLICATION_USER U
+         JOIN
+     COR.USER_PROFILE UP ON UP.USER_ID = U.ID
+         JOIN
+     COR.PERSON P ON U.PERSON_ID = P.ID
+WHERE U.USER_NAME = ?

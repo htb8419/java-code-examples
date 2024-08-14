@@ -24,6 +24,7 @@
         <module>logging-response-time</module>
         <module>security</module>
         <module>webmvc-async</module>
+        <module>jdbc/jdbc-connection</module>
         <module>jdbc-blob-streaming</module>
         <module>video-streaming</module>
         <module>spring-gateway</module>
@@ -49,6 +50,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
         <!--Test Dependencies-->
         <dependency>
