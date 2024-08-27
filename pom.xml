@@ -34,6 +34,8 @@
         <module>spring-boot-admin</module>
         <module>liquibase</module>
         <module>mongodb</module>
+        <module>infinispan</module>
+        <module>redis</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
