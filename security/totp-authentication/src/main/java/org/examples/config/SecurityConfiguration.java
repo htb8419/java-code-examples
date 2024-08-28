@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,18 +23,16 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/qrcode").permitAll()
-                .anyRequest().authenticated()
-                .and().
-                formLogin()
-                .and()
-                .headers().xssProtection();
-
+        http.csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sessionManagementConfigurer -> {
+                    sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                })
+                .authorizeHttpRequests(requestMatcherRegistry -> {
+                    requestMatcherRegistry.requestMatchers(HttpMethod.GET,"/qrcode").permitAll()
+                            .anyRequest().authenticated();
+                }).
+                formLogin(Customizer.withDefaults())
+                .headers(httpHeadersConfigurer -> httpHeadersConfigurer.xssProtection(Customizer.withDefaults()));
         return http.build();
     }
 

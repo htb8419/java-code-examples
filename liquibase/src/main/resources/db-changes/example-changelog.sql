@@ -1,3 +1,0 @@
---liquibase sql
---includeAll relativeToChangelogFile: true
---includeAll path: ./changelogs/

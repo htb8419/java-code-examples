@@ -25,8 +25,8 @@ public class InfinispanConfiguration {
     public Cache<String, Object> uniqueObjectCache(EmbeddedCacheManager cacheManager) throws IOException {
         org.infinispan.configuration.cache.Configuration cacheConfiguration = new ConfigurationBuilder()
                 .expiration().lifespan(60, TimeUnit.SECONDS)
-                .memory().maxCount(10_000)
-                .transaction().use1PcForAutoCommitTransactions(true)
+                .memory().maxCount(50_000)
+                //.transaction().use1PcForAutoCommitTransactions(true)
                 //.transaction().lockingMode(LockingMode.OPTIMISTIC)
                 .build();
         return cacheManager.administration()

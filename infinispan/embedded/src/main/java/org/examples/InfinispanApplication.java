@@ -22,11 +22,11 @@ public class InfinispanApplication {
     public CommandLineRunner objectCreator(UniqueObjectControlService uniqueObjectControlService) {
         return args -> {
             Person hadi = new Person("hadi", "tayebi", "1861274629", 40);
-            Person zahra = new Person("z", "tayebi", "4240170494", 33);
+            Person ali = new Person("ali", "marandi", "4240170494", 33);
             uniqueObjectControlService.addObject(hadi);
-            uniqueObjectControlService.addObject(zahra);
+            uniqueObjectControlService.addObject(ali);
             //uniqueObjectControlService.evict(hadi);
-            System.out.println("contents >> "+uniqueObjectControlService.contains(hadi));
+            System.out.printf("contents hadi %s ",uniqueObjectControlService.contains(hadi));
             uniqueObjectControlService.addObject(hadi, Duration.ofSeconds(13));
             uniqueObjectControlService.addObject(hadi, Duration.ofSeconds(15));
             uniqueObjectControlService.printAll();

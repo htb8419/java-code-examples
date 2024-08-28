@@ -13,6 +13,9 @@
     <packaging>pom</packaging>
     <name>kafka Examples</name>
 
+    <properties>
+        <spring-kafka.version>3.2.3</spring-kafka.version>
+    </properties>
     <modules>
         <module>producer</module>
         <module>consumer</module>

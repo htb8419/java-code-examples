@@ -9,6 +9,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 @Component
@@ -23,11 +24,9 @@ public class CarInfoProducer {
     @Scheduled(initialDelay = 10000, fixedDelay = 5000)
     public void run() {
         final CarInfo carInfo = carInfoSupplier.get();
-        final ListenableFuture<SendResult<String, CarInfo>> resultListenableFuture = kafkaTemplate.send("car-info", carInfo.getPlateNumber(), carInfo);
-        resultListenableFuture.addCallback(result -> {
+        final CompletableFuture<SendResult<String, CarInfo>> resultListenableFuture = kafkaTemplate.send("car-info", carInfo.getPlateNumber(), carInfo);
+        resultListenableFuture.thenAcceptAsync(result -> {
             System.out.println("success send message");
-        }, ex -> {
-            System.out.println("failed send message");
         });
     }
 
