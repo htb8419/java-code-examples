@@ -36,6 +36,7 @@
         <module>mongodb</module>
         <module>infinispan</module>
         <module>redis</module>
+        <module>http-cache-control</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

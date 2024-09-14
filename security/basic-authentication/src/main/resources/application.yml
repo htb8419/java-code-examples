@@ -3,3 +3,13 @@ server:
 logging:
   level:
     root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
+  elastic:
+    metrics:
+      export:
+        enabled: on

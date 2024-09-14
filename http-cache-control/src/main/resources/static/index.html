@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        dt {
+            float: left;
+            clear: left;
+            width: 6em;
+            font-weight: bold;
+        }
+
+        dd {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="main" style="display: flex;align-items: flex-start;flex-direction: column;">
+
+    <div>
+        <dl>
+            <dt>Firstname :</dt>
+            <dd id="firstname"></dd>
+            <dt>Lastname :</dt>
+            <dd id="lastname"></dd>
+            <dt>Age :</dt>
+            <dd id="age"></dd>
+        </dl>
+    </div>
+    <div style="margin-top: 1rem;">
+        <button type="button" onclick="personInquiry()">Inquiry</button>
+    </div>
+</div>
+<script>
+    function personInquiry() {
+        fetch('/person/findWithCode/99944585', {
+            method: 'GET'
+        }).then(response => response.json())
+            .then(data => {
+                document.getElementById("firstname").textContent = data.firstname
+                document.getElementById("lastname").textContent = data.lastname
+                document.getElementById("age").textContent = data.age
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>

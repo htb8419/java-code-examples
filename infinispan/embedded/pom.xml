@@ -10,8 +10,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>embedded</artifactId>
-    <name>infinispan-embedded</name>
+    <artifactId>infinispan-embedded</artifactId>
+    <name>Infinispan embedded</name>
 
     <dependencies>
         <dependency>
