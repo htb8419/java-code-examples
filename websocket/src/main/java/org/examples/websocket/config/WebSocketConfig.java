@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.messaging.support.ChannelInterceptor;
+import org.springframework.messaging.support.ImmutableMessageChannelInterceptor;
 import org.springframework.web.socket.config.annotation.*;
 
 import java.util.concurrent.TimeUnit;
@@ -46,6 +47,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Bean
     public ChannelInterceptor inboundChannelInterceptor() {
-        return new SimpInboundChannelInterceptor();
+        //TODO
+        return new ImmutableMessageChannelInterceptor();
     }
 }
