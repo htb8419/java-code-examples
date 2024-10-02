@@ -35,7 +35,6 @@ public class QRCodeController {
     private BufferedImage generateEAN13BarcodeImage(String barcodeText) throws Exception {
         QRCodeWriter barcodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
-
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 

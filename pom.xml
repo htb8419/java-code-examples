@@ -37,6 +37,8 @@
         <module>infinispan</module>
         <module>redis</module>
         <module>http-cache-control</module>
+        <module>spring-rest-client</module>
+        <module>websocket</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
