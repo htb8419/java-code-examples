@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscriber</title>
+    <script src="/sockjs.js" type="application/javascript"></script>
+    <script src="/stomp.js" type="application/javascript"></script>
+</head>
+<body>
+<script type="application/javascript">
+    const socket = new SockJS("http://127.0.0.1:9999/websocket");
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/notify', (message)=>console.log("received message >> ",message));
+        /*requestNotificationPermission(() => {
+            stompClient.subscribe('/topic/notify', (message)=>console.log("received message >> ",message));
+        })*/
+    });
+
+    function requestNotificationPermission(grantCallback) {
+        Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                grantCallback()
+            }
+        });
+    }
+
+    function showNotification(message) {
+        console.log("received message >> ",message)
+        let notify=message.body;
+        const notification = new Notification(notify.title, {
+            body: notify.body,
+            icon: notify.icon
+        });
+        setTimeout(() => {
+            if (notification && notification.close) {
+                notification.close()
+            }
+        }, 5000)
+    }
+</script>
+</body>
+</html>

@@ -40,7 +40,7 @@ public class QRCodeController {
 
     private String generateOtpUri(String secret) {
         //String.format("otpauth://totp/ACME%%20Co:john.doe@email.com?secret=%s&issuer=ACME%%20Co&algorithm=SHA1&digits=6&period=30", secret);
-        return new Totp(secret).uri("test_username");
+        return new Totp(secret).uri();
     }
 
     private String getUserSecret() {

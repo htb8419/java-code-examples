@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Publisher</title>
+    <script src="/sockjs.js" type="application/javascript"></script>
+    <script src="/stomp.js" type="application/javascript"></script>
+</head>
+<body>
+<script type="application/javascript">
+    const pushMessage = {
+        title: 'Hello',
+        body: 'This is a notification.',
+        icon: '/bmw.jpg'
+    }
+    const socket = new SockJS("http://127.0.0.1:9999/websocket");
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        stompClient.send('/app/push', {"content-type": "application/json"}, JSON.stringify(pushMessage));
+    });
+</script>
+</body>
+</html>
