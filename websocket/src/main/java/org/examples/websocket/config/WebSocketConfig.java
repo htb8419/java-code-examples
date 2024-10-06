@@ -22,9 +22,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 //.setAllowedOriginPatterns("*");
                 .withSockJS()
                 .setWebSocketEnabled(true)
-                .setHeartbeatTime(3000)
-                .setDisconnectDelay(1000)
-                ;
+                .setHeartbeatTime(10_000)
+                .setDisconnectDelay(5_000);
     }
 
     @Override

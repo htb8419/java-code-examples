@@ -3,6 +3,7 @@ package org.examples.websocket.dto;
 import java.util.Objects;
 
 public record NotificationPayloadDto (
+        String sid,
         String title,
         String body,
         String icon) {

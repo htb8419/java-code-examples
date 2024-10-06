@@ -7,20 +7,53 @@
     <script src="/stomp.js" type="application/javascript"></script>
 </head>
 <body>
+<form id="pushNotifyForm" style="max-width: 15rem">
+    <div style="display: flex;justify-content: space-between;">
+        <label for="subscribe">Subscribe :</label>
+        <input id="subscribe" name="subscribe"/>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+        <label for="title">Title :</label>
+        <input id="title" name="title"/>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+        <label for="content">Content :</label>
+        <textarea id="content" name="content"></textarea>
+    </div>
+    <div style="display: flex;margin-top: 1rem;">
+        <button id="pushNotifyBtn" type="button" disabled="disabled" onclick="pushNotify()" style="color: darkblue;">push notify</button>
+    </div>
+</form>
 <script type="application/javascript">
-    const pushMessage = {
-        title: 'Hello',
-        body: 'This is a notification.',
-        icon: '/bmw.jpg'
-    }
     const socket = new SockJS("http://127.0.0.1:9999/websocket");
     const stompClient = Stomp.over(socket);
 
-    stompClient.connect({}, function (frame) {
+    stompClient.connect({"heart-beat":[20000,20000]}, function (frame) {
         console.log('Connected: ' + frame);
-
-        stompClient.send('/app/push', {"content-type": "application/json"}, JSON.stringify(pushMessage));
+        document.getElementById("pushNotifyBtn").disabled = null;
     });
+
+    function pushNotify() {
+        let subscribe=document.getElementById("subscribe").value
+        let title = document.getElementById("title").value
+        let content = document.getElementById("content").value.trim();
+        if (title && content) {
+            const pushMessage = {
+                sid:subscribe,
+                title: title,
+                body: content,
+                icon: '/bmw.jpg'
+            }
+            console.log("pushMessage > ", pushMessage)
+
+            if(subscribe){
+                stompClient.send(`/app/push`, {"content-type": "application/json"}, JSON.stringify(pushMessage));
+            }else {
+                stompClient.send('/app/push', {"content-type": "application/json"}, JSON.stringify(pushMessage));
+            }
+
+        }
+    }
 </script>
 </body>
 </html>

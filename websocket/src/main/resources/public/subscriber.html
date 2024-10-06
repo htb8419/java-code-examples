@@ -8,15 +8,25 @@
 </head>
 <body>
 <script type="application/javascript">
-    const socket = new SockJS("http://127.0.0.1:9999/websocket");
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('sid');
+    console.assert(sessionId!=null)
+    if(sessionId==null){
+        throw new Error('sessionId is required.')
+    }
+    const socket = new SockJS(`http://127.0.0.1:9999/websocket`, [], {
+        sessionId: () => {
+            return sessionId
+        }
+    });
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/notify', (message)=>console.log("received message >> ",message));
-        /*requestNotificationPermission(() => {
-            stompClient.subscribe('/topic/notify', (message)=>console.log("received message >> ",message));
-        })*/
+        requestNotificationPermission(() => {
+            stompClient.subscribe('/topic/notify', showNotification);
+            stompClient.subscribe(`/user/${sessionId}/queue/notify`, showNotification);
+        })
     });
 
     function requestNotificationPermission(grantCallback) {
@@ -29,7 +39,7 @@
 
     function showNotification(message) {
         console.log("received message >> ",message)
-        let notify=message.body;
+        let notify = JSON.parse(message.body);
         const notification = new Notification(notify.title, {
             body: notify.body,
             icon: notify.icon
