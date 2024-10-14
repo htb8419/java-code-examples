@@ -1,6 +1,5 @@
 package org.examples.api;
 
-import org.examples.func.Captcha;
 import org.examples.func.CaptchaVerifier;
 import org.examples.func.ChallengeGenerator;
 import org.springframework.http.MediaType;
@@ -13,19 +12,19 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 @RequestMapping("/captcha")
 public class CaptchaController {
     private static final String CAPTCHA_ID_HEADER_NAME = "x-captcha-id";
-    private final ChallengeGenerator numericChallengeGenerator;
+    private final ChallengeGenerator challengeGenerator;
     private final CaptchaVerifier captchaVerifier;
 
-    public CaptchaController(ChallengeGenerator numericChallengeGenerator,
+    public CaptchaController(ChallengeGenerator challengeGenerator,
                              CaptchaVerifier captchaVerifier) {
-        this.numericChallengeGenerator = numericChallengeGenerator;
+        this.challengeGenerator = challengeGenerator;
         this.captchaVerifier = captchaVerifier;
     }
 
 
     @GetMapping()
     public ResponseEntity<StreamingResponseBody> generate() {
-        ChallengeGenerator.Challenge challenge = numericChallengeGenerator.get();
+        ChallengeGenerator.Challenge challenge = challengeGenerator.get();
         return ResponseEntity.ok()
                 .header(CAPTCHA_ID_HEADER_NAME, challenge.captchaId())
                 .contentType(MediaType.IMAGE_PNG)

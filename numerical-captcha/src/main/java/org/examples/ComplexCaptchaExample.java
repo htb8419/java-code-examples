@@ -57,11 +57,10 @@ public class ComplexCaptchaExample extends JPanel {
 
     private void drawWeavingLines(Graphics2D g2d, int width, int height) {
         Random random = new Random();
-        int lineCount = 20;
-
+        int lineCount = 10;
+        g2d.setColor(new Color(100, 100, 255, 150)); // Semi-transparent blue
         for (int i = 0; i < lineCount; i++) {
             int yStart = random.nextInt(height);
-            g2d.setColor(new Color(100, 100, 255, 150)); // Semi-transparent blue
             g2d.draw(new Line2D.Double(0, yStart, width, yStart + random.nextInt(20) - 10));
         }
     }
