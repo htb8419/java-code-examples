@@ -1,0 +1,8 @@
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+
+captcha:
+  secret-key: NdfdfJKxYj87vcw6555Z

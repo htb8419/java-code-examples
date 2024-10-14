@@ -14,7 +14,7 @@
     if(sessionId==null){
         throw new Error('sessionId is required.')
     }
-    const socket = new SockJS(`http://127.0.0.1:9999/websocket`, [], {
+    const socket = new SockJS(`http://127.0.0.1:9999/websocket?access`, [], {
         sessionId: () => {
             return sessionId
         }

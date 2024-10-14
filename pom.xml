@@ -39,6 +39,7 @@
         <module>http-cache-control</module>
         <module>spring-rest-client</module>
         <module>websocket</module>
+        <module>numerical-captcha</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

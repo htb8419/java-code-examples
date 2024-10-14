@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form style="min-width: 20%">
+    <input id="captcha-id" name="captcha-id" hidden="hidden"/>
+
+    <div style="display: flex;flex-direction: row;">
+        <img id="captcha" alt="captcha" style="border: black solid thin;"/>
+        <button type="button" onclick="fetchCaptcha()">refresh</button>
+    </div>
+    <div style="display: flex;margin-top: 1rem;">
+        <label for="captcha-response">captcha-response</label>
+        <input id="captcha-response" name="captcha-response"/>
+    </div>
+    <div style="display: flex;margin-top: 1rem;">
+        <button type="button" onclick="verify()">verify</button>
+    </div>
+</form>
+<script type="application/javascript">
+    function fetchCaptcha() {
+        fetch("/captcha", {
+            "method": "GET",
+            "mode": "cors",
+            "credentials": "include"
+        }).then(response => {
+            document.getElementById("captcha-id").value = response.headers.get('x-captcha-id')
+            return response.blob()
+        }).then(blob => {
+            document.getElementById("captcha").src = URL.createObjectURL(blob)
+            document.getElementById("captcha-response").value = ""
+            document.getElementById("captcha-response").focus()
+        })
+    }
+
+    window.addEventListener("load", fetchCaptcha)
+
+    function verify() {
+        let captchaResponse = document.getElementById("captcha-response").value
+        let captchaId = document.getElementById("captcha-id").value
+        const formdata = new FormData();
+        formdata.append("captchaResponse", captchaResponse);
+        formdata.append("captchaId", captchaId);
+        fetch("/captcha", {method: "POST", body: formdata})
+            .then(response => {
+                console.log("response status >> ",response.status)
+            }).catch(ex => {
+            console.log('/captcha error >> ', ex)
+        }).finally(() => {
+            fetchCaptcha()
+        })
+    }
+</script>
+</body>
+</html>
