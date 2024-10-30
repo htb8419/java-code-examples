@@ -26,6 +26,7 @@
         <module>webmvc-async</module>
         <module>jdbc/jdbc-blob-streaming</module>
         <module>jdbc/jdbc-connection</module>
+        <module>jdbc/jdbc-batch</module>
         <module>video-streaming</module>
         <module>spring-gateway</module>
         <module>easy-rules</module>
