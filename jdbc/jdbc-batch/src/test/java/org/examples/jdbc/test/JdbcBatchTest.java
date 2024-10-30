@@ -55,6 +55,7 @@ public class JdbcBatchTest {
                 ps.setString(4, item[3]);
                 ps.setDouble(5, Double.parseDouble(item[4]));
             }
+
             @Override
             public int getBatchSize() {
                 return lines.size();
