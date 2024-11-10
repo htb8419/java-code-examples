@@ -14,21 +14,22 @@ public class SampleSchedule {
     public SampleSchedule(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-    //@Scheduled(fixedDelay = 5_000)
-    public void taskA() throws InterruptedException {
-        System.out.println("SampleSchedule.taskA :" + Thread.currentThread().getName());
-        Thread.sleep(2_000);
+
+    @Scheduled(cron = "20 * * * * *")
+    public void taskA() {
+
     }
 
     @Async
     @Scheduled(timeUnit = TimeUnit.SECONDS, fixedRate = 1)
     public void taskB() {
-        System.out.println("start SampleSchedule.taskB :" + Thread.currentThread().getName());
+        String threadName = Thread.currentThread().getName();
+        System.out.println("start SampleSchedule.taskB :" + threadName);
         try {
             restTemplate.getForEntity("/_doc/person", String.class);
         } catch (Exception e) {
             System.out.println("sever error");
         }
-        System.out.println("finish SampleSchedule.taskB :" + Thread.currentThread().getName());
+        System.out.println("finish SampleSchedule.taskB :" + threadName);
     }
 }

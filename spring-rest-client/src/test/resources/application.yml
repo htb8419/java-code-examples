@@ -4,3 +4,13 @@ server:
 logging:
   level:
     root: fatal
+
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//192.168.25.20:1521/cor_dev
+    username: keycloak
+    password: keycloak
+    hikari:
+      connection-timeout: 10000

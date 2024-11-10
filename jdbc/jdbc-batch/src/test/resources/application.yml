@@ -1,7 +1,7 @@
 logging:
   level:
     root: warn
-    org.springframework: info
+    org.springframework.jdbc: debug
 
 spring:
   datasource:
@@ -9,3 +9,5 @@ spring:
     url: jdbc:oracle:thin:@//192.168.25.20:1521/cor_dev
     username: keycloak
     password: keycloak
+    hikari:
+      connection-timeout: 10000

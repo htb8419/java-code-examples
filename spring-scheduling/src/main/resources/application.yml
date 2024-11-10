@@ -13,4 +13,5 @@ spring:
     execution:
       pool:
         core-size: 2
+        queue-capacity: 20
       thread-name-prefix: "task-exec-"
