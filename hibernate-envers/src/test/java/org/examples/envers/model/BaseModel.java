@@ -4,17 +4,16 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class AbstractModel {
+public abstract class BaseModel {
 
     private Integer id;
     private UUID uid;
+    private Integer version;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
@@ -36,6 +35,15 @@ public abstract class AbstractModel {
 
     public void setUid(UUID uid) {
         this.uid = uid;
+    }
+
+    @Version
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Column(updatable = false, nullable = false)

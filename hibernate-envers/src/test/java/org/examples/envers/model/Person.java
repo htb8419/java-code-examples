@@ -1,15 +1,12 @@
 package org.examples.envers.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
 @Entity
 @Audited
-public class Person extends AbstractModel {
+public class Person extends BaseModel {
 
     private String name;
     private String lastname;
