@@ -9,8 +9,8 @@ import org.hibernate.envers.NotAudited;
 
 @Entity
 @Audited
-public class Person {
-    private Integer id;
+public class Person extends AbstractModel {
+
     private String name;
     private String lastname;
     private String email;
@@ -22,16 +22,6 @@ public class Person {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
