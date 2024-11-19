@@ -42,6 +42,7 @@
         <module>websocket</module>
         <module>numerical-captcha</module>
         <module>hibernate-envers</module>
+        <module>validation-jsr-303</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
