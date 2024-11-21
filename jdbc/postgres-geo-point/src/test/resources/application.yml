@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: warn
+    org.springframework.jdbc: debug
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.0.91.14:9000/ht
+    username: user
+    password: pas
+    hikari:
+      connection-timeout: 10000

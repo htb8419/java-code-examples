@@ -43,6 +43,7 @@
         <module>numerical-captcha</module>
         <module>hibernate-envers</module>
         <module>validation-jsr-303</module>
+        <module>jdbc/postgres-geo-point</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
