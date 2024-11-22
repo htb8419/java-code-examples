@@ -8,7 +8,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 
 @Entity
-@Table(name = "TST_FILE_STORAGE")
+@Table(name = "FILE_STORAGE")
 public class FileStorage {
     private Integer id;
     private String fileName;

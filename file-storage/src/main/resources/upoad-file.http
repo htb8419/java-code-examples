@@ -1,0 +1,10 @@
+### Upload File
+POST http://127.0.0.1:8080/file
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="samand.jpg"
+Content-Type: image/jpeg
+
+< d:\\samand.jpg
+--boundary--

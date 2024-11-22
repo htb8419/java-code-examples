@@ -44,6 +44,8 @@
         <module>hibernate-envers</module>
         <module>validation-jsr-303</module>
         <module>jdbc/postgres-geo-point</module>
+        <module>exception-handling</module>
+        <module>file-storage</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->

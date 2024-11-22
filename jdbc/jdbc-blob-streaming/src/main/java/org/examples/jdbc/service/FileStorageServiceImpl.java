@@ -31,13 +31,13 @@ public class FileStorageServiceImpl implements FileStorageService {
 
     @Transactional
     public FileStorage get(Integer fileId) throws IOException {
-        final Session session = sessionFactory.openSession();
+        final Session session = getSession();
         final FileStorage fileStorage = session.get(FileStorage.class, fileId);
         //Hibernate.initialize(fileStorage);
         return fileStorage;
     }
     Session getSession(){
-        final Session session = sessionFactory.openSession();
+        final Session session = sessionFactory.getCurrentSession();
         Assert.isTrue(session.isOpen(), "can not open session");
         return session;
     }
