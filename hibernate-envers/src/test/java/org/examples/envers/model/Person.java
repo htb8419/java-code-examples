@@ -6,7 +6,7 @@ import org.hibernate.envers.NotAudited;
 
 @Entity
 @Audited
-public class Person extends BaseModel {
+public class Person extends AuditModel<Integer> {
 
     private String name;
     private String lastname;

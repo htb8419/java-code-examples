@@ -11,6 +11,7 @@ public class FileInfo {
     private Long id;
     private UUID uid;
     private String filename;
+    private String contentType;
     private Long fileSize;
 
     @Id
@@ -41,6 +42,14 @@ public class FileInfo {
         this.filename = name;
     }
 
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
     public Long getFileSize() {
         return fileSize;
     }
@@ -48,5 +57,4 @@ public class FileInfo {
     public void setFileSize(long fileSize) {
         this.fileSize = fileSize;
     }
-
 }

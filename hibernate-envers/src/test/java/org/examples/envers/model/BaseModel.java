@@ -9,21 +9,18 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class BaseModel {
+public abstract class BaseModel<T>{
 
-    private Integer id;
+    private T id;
     private UUID uid;
     private Integer version;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public T getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(T id) {
         this.id = id;
     }
 
@@ -44,25 +41,5 @@ public abstract class BaseModel {
 
     public void setVersion(Integer version) {
         this.version = version;
-    }
-
-    @Column(updatable = false, nullable = false)
-    @CreationTimestamp
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime created) {
-        this.createdAt = created;
-    }
-
-    @Column(nullable = false)
-    @UpdateTimestamp
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modified) {
-        this.modifiedAt = modified;
     }
 }

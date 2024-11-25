@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -31,23 +30,29 @@ public class FileService {
     }
 
     @Transactional
-    public String storeFile(MultipartFile file) throws IOException {
-        //Blob blob = streamToBlob(file.getInputStream(), file.getSize());
-        FileInfo fileInfo = new FileInfo();
-        fileInfo.setFilename(file.getOriginalFilename());
-        fileInfo.setFileSize(file.getSize());
+    public String storeFile(MultipartFile multipartFile) throws IOException {
+        FileInfo fileInfo = getInstanceWithMultipartFile(multipartFile);
         fileInfo = fileRepository.save(fileInfo);
-        FileContent fileContent = new FileContent(fileInfo.getId(), fileInfo.getUid(), file.getBytes());
+        FileContent fileContent = new FileContent(fileInfo.getId(), fileInfo.getUid(), multipartFile.getBytes());
         fileContentRepository.save(fileContent);
         return fileInfo.getUid().toString();
     }
 
-    public FileDto readFileContent(UUID uid) {
+    public FileDto readFile(UUID uid) {
+        FileInfo fileInfo = fileRepository.findByUid(uid).orElseThrow();
         byte[] content = fileContentRepository.findByUid(uid).orElseThrow().getContent();
-        return new ByteArrayInputStream(content);
+        return new FileDto(fileInfo.getFilename(), fileInfo.getContentType(), fileInfo.getFileSize().intValue(), content);
     }
 
     public Blob streamToBlob(InputStream content, long size) {
         return sessionFactory.openSession().getLobHelper().createBlob(content, size);
+    }
+
+    public FileInfo getInstanceWithMultipartFile(MultipartFile multipartFile) {
+        FileInfo fileInfo = new FileInfo();
+        fileInfo.setFilename(multipartFile.getOriginalFilename());
+        fileInfo.setContentType(multipartFile.getContentType());
+        fileInfo.setFileSize(multipartFile.getSize());
+        return fileInfo;
     }
 }

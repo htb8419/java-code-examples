@@ -1,16 +1,20 @@
 package org.examples.filestorage;
 
+import org.examples.filestorage.model.dto.FileDto;
 import org.examples.filestorage.service.FileService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+
+import static org.springframework.http.HttpHeaders.CONTENT_LENGTH;
 
 @RestController
 @RequestMapping("/file")
@@ -31,16 +35,15 @@ public class FileController {
             return ResponseEntity.status(500).body(null);
         }
     }
-    @GetMapping("/{uid}")
-    public ResponseEntity<InputStream> getFile(@PathVariable("uid")UUID uid) {
-        try {
-            InputStream inputStream =fileService.readFileContent(uid);
-            HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=test" );
-            headers.add(HttpHeaders.CONTENT_TYPE, "image/jpeg");  // You can customize this based on the file type
 
-            // Return the InputStream in the response body
-            return new ResponseEntity<>(inputStream, headers, HttpStatus.OK);
+    @GetMapping("/{uid}")
+    public ResponseEntity<StreamingResponseBody> getFile(@PathVariable("uid") UUID uid) {
+        try {
+            FileDto fileDto = fileService.readFile(uid);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .header(HttpHeaders.CONTENT_TYPE, fileDto.contentType())
+                    .header(CONTENT_LENGTH, String.valueOf(fileDto.size()))
+                    .body(outputStream -> StreamUtils.copy(fileDto.content(), outputStream));
         } catch (NoSuchElementException e) {
             return ResponseEntity.badRequest().build();
         } catch (Exception e) {
