@@ -1,4 +1,4 @@
-package org.examples.envers.model;
+package org.examples.auditing.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

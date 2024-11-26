@@ -1,24 +1,22 @@
-package org.examples.envers.test;
+package org.examples.auditing.test;
 
 import jakarta.persistence.EntityManagerFactory;
 import net.bytebuddy.utility.RandomString;
-import org.examples.envers.model.AuditRevisionEntity;
-import org.examples.envers.model.Person;
-import org.examples.envers.repo.PersonRepository;
+import org.examples.auditing.model.AuditRevisionEntity;
+import org.examples.auditing.model.Person;
+import org.examples.auditing.repo.PersonRepository;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
-import org.hibernate.envers.RevisionType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootTest
-public class HibernateEnversTest {
+public class JpaAuditingTest {
 
     @Autowired
     PersonRepository personRepository;
