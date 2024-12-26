@@ -2,7 +2,7 @@ const notifyButton = document.getElementById('notify');
 
 // Register service worker
 if ('serviceWorker' in navigator && 'PushManager' in window) {
-    navigator.serviceWorker.register('sw.js')
+    navigator.serviceWorker.register('sw.js?v='+Date.now())
         .then(registration => {
             console.log('Service Worker registered with scope:', registration.scope);
         })
@@ -31,9 +31,23 @@ async function subscribeToPush() {
         applicationServerKey: urlBase64ToUint8Array('BBYCxwATP2vVgw7mMPHJfT6bZrJP2iUV7OP_oxHzEcNFenrX66D8G34CdEmVULNg4WJXfjkeyT0AT9LwavpN8M4=')
     });
 
-    console.log('Push Subscription:', JSON.stringify(subscription));
     // Send this subscription to your server to send notifications
-    // e.g., via fetch('/subscribe', { method: 'POST', body: JSON.stringify(subscription) })
+    // e.g., via
+    fetch('/api/push/subscribe', { method: 'POST',headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(subscription)
+    }).then(()=>{
+            console.log("subbbbbbbbbbbbbbbbbb")
+    })
+}
+function createSubscription({endpoint,keys}) {
+    return  {
+        endpoint,
+        keys,
+        encoding: PushManager.supportedContentEncodings,
+        /* other app-specific data, such as user identity */
+    };
 }
 
 function urlBase64ToUint8Array(base64String) {
