@@ -1,5 +1,4 @@
 server:
-  port: 9999
   ssl:
     enabled: false
 logging:

@@ -1,0 +1,12 @@
+server:
+  ssl:
+    enabled: false
+logging:
+  level:
+    org.springframework: info
+
+fixa:
+  notification:
+   private-key-location: classpath:key/private_key.pem
+   public-key-location: classpath:key/public_key.pem
+   subject: mailto:your-email@example.com

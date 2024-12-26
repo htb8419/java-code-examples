@@ -5,15 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+import java.util.Optional;
+
 @Configuration
 @EnableJpaAuditing
-public class JpaAwareConfig {
+public class JpaAuditingConfig {
 
     @Bean
     public AuditorAware<Integer> auditorAware() {
-        return () -> {
-            System.out.println("return current auditor");
-            return java.util.Optional.of(1);
-        };//;
+        return () -> Optional.of(1);
     }
 }

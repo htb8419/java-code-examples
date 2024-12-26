@@ -3,6 +3,9 @@ package org.examples.auditing.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Version;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -11,51 +14,24 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class AuditModel<T> extends BaseModel<T> {
 
-    private Integer createdBy;
-    private LocalDateTime createdDate;
-    private Integer lastModifiedBy;
-    private LocalDateTime lastModifiedDate;
-
     @CreatedBy
     @Column(updatable = false, nullable = false)
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
+    private Integer createdBy;
     @CreatedDate
-    @Column(nullable = false)
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdAt) {
-        this.createdDate = createdAt;
-    }
-
-    @LastModifiedBy
     @Column(updatable = false, nullable = false)
-    public Integer getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(Integer lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
+    private LocalDateTime createdDate;
+    @LastModifiedBy
+    @Column(nullable = false)
+    private Integer lastModifiedBy;
     @LastModifiedDate
-    public LocalDateTime getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(LocalDateTime lastModifiedAt) {
-        this.lastModifiedDate = lastModifiedAt;
-    }
+    @Column(nullable = false)
+    private LocalDateTime lastModifiedDate;
+    @Version
+    private Integer version;
 }

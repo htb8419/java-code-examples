@@ -47,6 +47,7 @@
         <module>exception-handling</module>
         <module>file-storage</module>
         <module>jap-auditing</module>
+        <module>push-notification</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
