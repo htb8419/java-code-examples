@@ -1,7 +1,11 @@
 package org.examples.notification;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.martijndwars.webpush.Notification;
 import nl.martijndwars.webpush.PushService;
+import nl.martijndwars.webpush.Subscription;
+import nl.martijndwars.webpush.Urgency;
+import org.apache.http.HttpResponse;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.security.PrivateKey;
@@ -30,13 +34,15 @@ public class PushNotificationService {
         this.pushService.setSubject(subject);
     }
 
-    public void sendNotification(PushSubscription subscription, String payload) throws Exception {
-    /*    Notification notification = new Notification(
-                subscription.endpoint(),
-                Base64.getDecoder().decode(subscription.p256dh()),
-                Base64.getDecoder().decode(subscription.auth()),
-                payload
-        );
-        pushService.send(notification);*/
+    public void sendNotification(Subscription subscription, String payload) throws Exception {
+        NotificationPayload notificationPayload=new NotificationPayload("newOrder => 1",payload,"test");
+        Notification notification = new Notification(subscription,payload, Urgency.HIGH);
+
+        HttpResponse httpResponse =pushService.send(notification);
+        System.out.println(httpResponse.getStatusLine().getStatusCode());
+    }
+
+    public record NotificationPayload(String title,String body,String icon){
+
     }
 }
