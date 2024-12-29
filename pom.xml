@@ -48,6 +48,7 @@
         <module>file-storage</module>
         <module>jap-auditing</module>
         <module>push-notification</module>
+        <module>hibernate-search</module>
     </modules>
     <dependencies>
         <!--Spring Dependency-->
