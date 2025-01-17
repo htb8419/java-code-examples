@@ -1,11 +1,11 @@
 self.addEventListener('push', event => {
     console.log("pussssssssh event",event)
-    const data = event.data.text(); // Parse the notification data
+    const data = event.data.json(); // Parse the notification data
     /*const data ={
         title:'sds',
         body:"salam"
     }*/
-    self.registration.showNotification("title", {
-        body: data
+    self.registration.showNotification(data.title, {
+        body: data.body
     });
 });

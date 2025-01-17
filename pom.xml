@@ -46,7 +46,7 @@
         <module>jdbc/postgres-geo-point</module>
         <module>exception-handling</module>
         <module>file-storage</module>
-        <module>jap-auditing</module>
+        <module>jpa-auditing</module>
         <module>push-notification</module>
         <module>hibernate-search</module>
     </modules>

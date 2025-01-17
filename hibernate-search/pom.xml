@@ -4,11 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>java-examples-parent</artifactId>
         <groupId>org.examples</groupId>
+        <artifactId>java-examples-parent</artifactId>
         <version>0.0.1</version>
     </parent>
     <artifactId>hibernate-search</artifactId>
+    <name>Hibernate search</name>
 
     <dependencies>
         <dependency>
@@ -16,18 +17,13 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.search</groupId>
-            <artifactId>hibernate-search-mapper-orm</artifactId>
-            <version>6.2.0.Final</version> <!-- Use the latest stable version -->
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-envers</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.search</groupId>
-            <artifactId>hibernate-search-backend-elasticsearch</artifactId>
-            <version>6.2.0.Final</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
+
     </dependencies>
 </project>
