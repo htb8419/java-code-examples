@@ -16,21 +16,25 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class InfinispanConfiguration {
 
-    @Bean
-    public EmbeddedCacheManager infinispanCacheManager() {
-        GlobalConfiguration globalConfiguration = GlobalConfigurationBuilder.defaultClusteredBuilder().build();
-        return new DefaultCacheManager(globalConfiguration);
-    }
     @Bean(name = "uniqueObjectCache")
-    public Cache<String, Object> uniqueObjectCache(EmbeddedCacheManager cacheManager) throws IOException {
+    public Cache<String, Object> uniqueObjectCache(EmbeddedCacheManager cacheManager){
         org.infinispan.configuration.cache.Configuration cacheConfiguration = new ConfigurationBuilder()
-                .expiration().lifespan(60, TimeUnit.SECONDS)
+                .expiration()
+                .lifespan(60, TimeUnit.SECONDS)
                 .memory().maxCount(50_000)
-                //.transaction().use1PcForAutoCommitTransactions(true)
-                //.transaction().lockingMode(LockingMode.OPTIMISTIC)
                 .build();
         return cacheManager.administration()
                 .withFlags(CacheContainerAdmin.AdminFlag.VOLATILE)
                 .getOrCreateCache("uniqueObjectCache", cacheConfiguration);
+    }
+    @Bean
+    public Cache<String, Object> defaultCache(EmbeddedCacheManager cacheManager) {
+        org.infinispan.configuration.cache.Configuration cacheConfiguration = new ConfigurationBuilder()
+                .expiration().lifespan(60, TimeUnit.SECONDS)
+                .memory().maxCount(10_000)
+                .build();
+        return cacheManager.administration()
+                .withFlags(CacheContainerAdmin.AdminFlag.VOLATILE)
+                .getOrCreateCache("defaultCache", cacheConfiguration);
     }
 }

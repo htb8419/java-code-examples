@@ -1,3 +1,16 @@
 logging:
   level:
     root: info
+
+spring:
+  application:
+    name: ipg-service
+  profiles:
+    active: dev
+  config:
+    import: "optional:configserver:"
+
+fixa:
+  ipg:
+    pec-gateway:
+      id: 1

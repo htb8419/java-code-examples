@@ -1,0 +1,10 @@
+services:
+  infinispan:
+    image: infinispan/server:15.1.5.Final
+    container_name: infinispan-server
+    ports:
+      - "11222:11222"
+    environment:
+      - USER=admin
+      - PASS=admin
+    restart: unless-stopped

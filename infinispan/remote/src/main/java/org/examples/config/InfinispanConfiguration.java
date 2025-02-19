@@ -1,37 +1,35 @@
 package org.examples.config;
 
-import org.infinispan.Cache;
+import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.ClientIntelligence;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
-import org.infinispan.manager.DefaultCacheManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class InfinispanConfiguration {
 
     @Bean
-    public RemoteCacheManager acheManager() {
+    @Primary
+    public RemoteCacheManager remoteCacheManager(@Value("${spring.profiles.active}")String profile) {
+        System.out.println("Infinispan profile: " + profile);
         ConfigurationBuilder builder = new ConfigurationBuilder();
-        builder.memory().maxCount(10_000);
-        //builder. ("hotrod://admin:secret@localhost:11222");
-        builder.expiration().lifespan(60, TimeUnit.SECONDS);
-
+        builder.connectionTimeout(5000);
+        builder.clientIntelligence(ClientIntelligence.BASIC);
+        builder.serverFailureTimeout(5000);
+        //builder.uri("hotrod://admin:admin@127.0.0.1:11222?auth_realm=default");
+        builder.addServer().host("127.0.0.1").port(11222)
+                .security().authentication()
+                .username("admin").password("admin");
         return new RemoteCacheManager(builder.build());
     }
 
-    @Bean(name = "uniqueObjectCache")
-    public Cache<String, Object> uniqueObjectCache(RemoteCacheManager acheManager) throws IOException {
-        org.infinispan.configuration.cache.Configuration cacheConfiguration = new ConfigurationBuilder()
-                .expiration().lifespan(60, TimeUnit.SECONDS)
-                .memory().maxCount(10_000)
-                .transaction().use1PcForAutoCommitTransactions(true)
-                //.transaction().lockingMode(LockingMode.OPTIMISTIC)
-                .build();
-        return cacheManager.createCache("uniqueObjectCache", cacheConfiguration);
+    @Bean(name = "testCache")
+    public RemoteCache<Object, Object> testCache(RemoteCacheManager cacheManager) {
+        return cacheManager
+                .getCache("testCache");
     }
 }

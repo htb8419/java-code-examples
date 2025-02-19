@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <version.infinispan>15.0.5.Final</version.infinispan>
+        <version.infinispan>15.1.5.Final</version.infinispan>
     </properties>
     <modules>
         <module>embedded</module>

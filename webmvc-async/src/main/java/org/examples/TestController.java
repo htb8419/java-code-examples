@@ -13,8 +13,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class TestController {
 
-
-    @GetMapping("/test")
+    @GetMapping("/api/test")
     @Async("mvcTaskExecutor")
     public CompletableFuture<ResponseEntity<String>> hello(ServletWebRequest webRequest) {
         String mvcThreadName = Thread.currentThread().getName();
@@ -24,12 +23,12 @@ public class TestController {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.printf("CompletableFuture.supplyAsync [threadName=%s] \n", Thread.currentThread().getName());
-                Thread.sleep(3_000);
+                Thread.sleep(1_000);
                 //do anything
                 return ResponseEntity.ok("hi, dear user");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }).orTimeout(2, TimeUnit.SECONDS);
+        }).orTimeout(3, TimeUnit.SECONDS);
     }
 }

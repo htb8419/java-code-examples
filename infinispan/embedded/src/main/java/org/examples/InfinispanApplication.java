@@ -1,6 +1,5 @@
 package org.examples;
 
-import org.infinispan.Cache;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +17,7 @@ public class InfinispanApplication {
         SpringApplication.run(InfinispanApplication.class, args);
     }
 
-    @Bean
+    //@Bean
     public CommandLineRunner objectCreator(UniqueObjectControlService uniqueObjectControlService) {
         return args -> {
             Person hadi = new Person("hadi", "tayebi", "1861274629", 40);

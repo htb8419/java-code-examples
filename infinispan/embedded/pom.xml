@@ -16,8 +16,14 @@
     <dependencies>
         <dependency>
             <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-core-jakarta</artifactId>
+            <artifactId>infinispan-spring-boot3-starter-embedded</artifactId>
+            <version>${infinispan.version}</version>
         </dependency>
+   <!--     <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core-jakarta</artifactId>
+            <version>14.0.27.Final</version>
+        </dependency>-->
         <!--<dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>

@@ -1,0 +1,17 @@
+spring:
+  cache:
+    cache-names:
+      - rate-limit-buckets
+    caffeine:
+      spec: maximumSize=100000,expireAfterAccess=24h
+
+bucket4j:
+  enabled: true
+  methods:
+    - name: test-bucket4j
+      cache-name: rate-limit-buckets
+      rate-limit:
+        bandwidths:
+          - capacity: 5 # refills 5 tokens every 10 seconds (intervall)
+            time: 15
+            unit: seconds
